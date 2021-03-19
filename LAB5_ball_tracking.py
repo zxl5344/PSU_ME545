@@ -16,7 +16,7 @@ greenLower = (29, 86, 6)
 greenUpper = (64, 255, 255)
 
 #get camera
-camera = cv2.VideoCapture(1)
+camera = cv2.VideoCapture(0)
 
 
 #Creating a Pandas DataFrame To Store Data Point
