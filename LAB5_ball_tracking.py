@@ -4,7 +4,6 @@ import numpy as np
 import imutils
 import cv2
 import time
-import matplotlib.pyplot as plt
 
 
 # define the lower and upper boundaries of the "green"
