@@ -1,11 +1,9 @@
 # import the necessary packages
 from collections import deque
 import numpy as np
-import argparse
 import imutils
 import cv2
 import time
-import pandas as pd
 import matplotlib.pyplot as plt
 
 
@@ -18,10 +16,6 @@ greenUpper = (64, 255, 255)
 #get camera
 camera = cv2.VideoCapture(0)
 
-
-#Creating a Pandas DataFrame To Store Data Point
-Data_Features = ['x', 'y', 'time']
-Data_Points = pd.DataFrame(data = None, columns = Data_Features , dtype = float)
 
 
 #Reading the time in the begining of the video.
@@ -38,7 +32,7 @@ while True:
 	# resize the frame, blur it, and convert it to the HSV
 	# color space
 	frame = imutils.resize(frame, width=1000)
-	# blurred = cv2.GaussianBlur(frame, (11, 11), 0)
+	blurred = cv2.GaussianBlur(frame, (11, 11), 0)
 	hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
 	# construct a mask for the color "green", then perform
@@ -71,10 +65,7 @@ while True:
 			# then update the list of tracked points
 			cv2.circle(frame, (int(x), int(y)), int(radius),
 				(0, 255, 255), 2)
-			cv2.circle(frame, center, 5, (0, 0, 255), -1)
-			
-			#Save The Data Points
-			Data_Points.loc[Data_Points.size/3] = [x , y, current_time]
+			cv2.circle(frame, center, 5, (0, 0, 255), -1)		
 
 
 			# otherwise, compute the thickness of the line and
