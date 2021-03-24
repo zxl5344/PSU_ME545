@@ -23,18 +23,19 @@ for i in range(0,10):
 
 ser.flush()
 angle = 90
+
 # define the lower and upper boundaries of the "green"
 # ball in the HSV color space, then initialize the
 # list of tracked points
-greenLower = (29, 86, 6)
-greenUpper = (120, 240, 240)
+greenLower = (30, 40, 80)
+greenUpper = (100, 255, 255)
 
 #get camera
 camera = cv2.VideoCapture(0)
 camera.set(4,480)
 camera.set(4,360)
 
-start_time = time.time
+
 
 # keep looping
 
@@ -83,14 +84,15 @@ while True:
            		 # display coordinate data
 			font = cv2.FONT_HERSHEY_SIMPLEX
 			
-			angle = int(np.arctan(-(x-310)/302.22)*180/3.14+90)
+			angle = (np.arctan(-(x-310)/302.22)*180/np.pi+90)
 			cv2.putText(frame,str(int(x)) + ',' + str(int(y)) ,(int(x), int(y)), font, 1,(255,255,255),2)
 			
 
 
 	# show the frame to our screen
 	cv2.imshow("Frame", frame)
-	print(angle)
+	angle = int(angle);
+	print(angle-90)
 	ser.write(chr(angle))
 	line = ser.readline().decode('utf-8').rstrip()
 	print('Arduino'+line)
